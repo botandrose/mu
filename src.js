@@ -1,10 +1,7 @@
 function Mu(template, element) {
   return template
     // events
-    .replace(/@(\w+)="([^"]+)"/g, (_,name,callback) => {
-      element["μ"+name] ||= element.addEventListener(name, event => event.μ?.apply(element, [event])) || 1
-      return `on${name}="event.μ=function(event){${callback}}"`
-    })
+    .replace(/@(\w+)="([^"]+)"/g, (_,name,callback) => `on${name}="${callback.replace(/\bthis\b/,'getRootNode().host')}"`)
     // values
     .replace(/{{([^}]+)}}/g, (_, key) => element[key])
 }

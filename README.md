@@ -17,6 +17,7 @@ This function does two things:
    ```js
    Mu(`<button @click="this.save()">Save</button>`, file)
    // clicking the button will call `file.save()`
+   // (provided that `file` is the custom element this is being rendered within)
 
 ## Full Example
 
@@ -34,29 +35,32 @@ This is exactly what Mu was designed for!
 class MyCounter extends HTMLElement {
   constructor() {
     super()
+    this.shadow = this.attachShadow({ mode: "open" })
     this.count = 0
   }
   connectedCallback() {
     this.template = `<button @click="this.increment()">{{count}}</button>`
-    this.innerHTML = Mu(this.template, this)
+    this.shadow.innerHTML = Mu(this.template, this)
   }
   increment() {
     this.count++
-    this.innerHTML = Mu(this.template, this)
+    this.shadow.innerHTML = Mu(this.template, this)
   }
 }
 customElements.define("my-counter", MyCounter)
 
-function Mu(e,r){return e.replace(/@(\w+)="([^"]+)"/g,(e,n,t)=>(r["μ"+n]||=r.addEventListener(n,e=>e.μ?.apply(r,[e]))||1,`on${n}="event.μ=function(event){${t}}"`)).replace(/{{([^}]+)}}/g,(e,n)=>r[n])}
+function Mu(e,t){return e.replace(/@(\w+)="([^"]+)"/g,(e,o,t)=>`on${o}="${t.replace(/\bthis\b/,"getRootNode().host")}"`).replace(/{{([^}]+)}}/g,(e,o)=>t[o])}
 ```
 
 Notice that Mu is simply pasted inline at the bottom of the file. Blasphemy!
 
-But the idea is for Mu to be used in a single-file custom element. No dependencies, no build step, no Node.js, no network activity. Just a utility function small enough that pasting it in the bottom is reasonable. Its only 204 bytes!
+But the idea is for Mu to be used in a single-file custom element. No dependencies, no build step, no Node.js, no network activity. Just a utility function small enough that pasting it in the bottom is reasonable. Its only 158 bytes!
 
 ## Details and Limitations
+* There's no Virtual DOM... `Mu` just returns a string! You're responsible for somehow rendering that string to the DOM.
 * The templating is as basic as it gets. There are no ifs or loops or block expressions, but I'm open to adding these if it doesn't blow up the filesize.
-* The event handling, on the other hand, is surprisingly featureful. The `event` variable is available in the template to pass to the method call, or to call `event.preventDefault()` inline, or whatever. Event delegation via bubbling is used here, so the rendered template is assumed to be in the DOM as child of the `context` object. However, there's no Virtual DOM... `Mu` just returns a string! You're responsible for rendering that string to the DOM.
+* The event handling is just rewriting `this`, so the `event` variable is available in the template like you'd expect.
+* Note that the event handling requires you to be rendering within the `context`'s Shadow DOM.
 
 ## Naming
 * Mu is the name of the Greek letter μ, often meaning "micro" in modern usage.
