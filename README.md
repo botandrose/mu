@@ -38,8 +38,6 @@ class MyCounter extends HTMLElement {
   }
   connectedCallback() {
     this.template = `<button @click="this.increment()">{{count}}</button>`
-    this.render() {
-  render() {
     this.innerHTML = Mu(this.template, this)
   }
   increment() {
