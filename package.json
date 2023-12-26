@@ -1,0 +1,1 @@
+{ "dependencies": { "uglify-js": "^3.17.4" }, "scripts": { "build": "uglifyjs -c -m -- src.js > mu.js" } }
