@@ -23,7 +23,7 @@ This function does two things:
 Let's say you want to distribute a reusable custom element as simply as possible. Something like this:
 
 ```html
-<script src="/my-counter.js"></script>
+<script src="//some.cdn.com/my-counter.js"></script>
 <my-counter/>
 ```
 
