@@ -47,7 +47,7 @@ class MyCounter extends HTMLElement {
 }
 customElements.define("my-counter", MyCounter)
 
-function Mu(e,r){return e.replace(/@([^=]+)="([^"]+)"/g,(e,n,t)=>(r["μ"+n]||=addEventListener(n,e=>e.μ?.apply(r,[e]))||1,`on${n}="event.μ=function(event){${t}}"`)).replace(/{{([^}]+)}}/g,(e,n)=>r[n])}
+function Mu(e,r){return e.replace(/@([^=]+)="([^"]+)"/g,(e,n,t)=>(r["μ"+n]||=r.addEventListener(n,e=>e.μ?.apply(r,[e]))||1,`on${n}="event.μ=function(event){${t}}"`)).replace(/{{([^}]+)}}/g,(e,n)=>r[n])}
 ```
 
 Notice that Mu is simply pasted inline at the bottom of the file. Blasphemy!
