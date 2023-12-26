@@ -1,6 +1,6 @@
-# Mu
+## Mu
 
-Micro-templating, with events!
+μ🥸 Micro-templating, with events! μ🥸
 
 ## Features
 
