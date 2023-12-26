@@ -1,1 +1,1 @@
-function Mu(e,r){return e.replace(/@([^= ]+)="([^"]+)"/g,(e,n,t)=>(r["μ"+n]||=r.addEventListener(n,e=>e.μ?.apply(r,[e]))||1,`on${n}="event.μ=function(event){${t}}"`)).replace(/{{([^}]+)}}/g,(e,n)=>r[n])}
+function Mu(e,r){return e.replace(/@([\w:]+)="([^"]+)"/g,(e,n,t)=>(r["μ"+n]||=r.addEventListener(n,e=>e.μ?.apply(r,[e]))||1,`on${n}="event.μ=function(event){${t}}"`)).replace(/{{([^}]+)}}/g,(e,n)=>r[n])}

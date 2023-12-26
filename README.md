@@ -47,12 +47,12 @@ class MyCounter extends HTMLElement {
 }
 customElements.define("my-counter", MyCounter)
 
-function Mu(e,r){return e.replace(/@([^=]+)="([^"]+)"/g,(e,n,t)=>(r["μ"+n]||=r.addEventListener(n,e=>e.μ?.apply(r,[e]))||1,`on${n}="event.μ=function(event){${t}}"`)).replace(/{{([^}]+)}}/g,(e,n)=>r[n])}
+function Mu(e,r){return e.replace(/@([\w:]+)="([^"]+)"/g,(e,n,t)=>(r["μ"+n]||=r.addEventListener(n,e=>e.μ?.apply(r,[e]))||1,`on${n}="event.μ=function(event){${t}}"`)).replace(/{{([^}]+)}}/g,(e,n)=>r[n])}
 ```
 
 Notice that Mu is simply pasted inline at the bottom of the file. Blasphemy!
 
-But the idea is for Mu to be used in a single-file custom element. No dependencies, no build step, no Node.js, no network activity. Just a utility function small enough that pasting it in the bottom is reasonable. Its only 206 bytes! 
+But the idea is for Mu to be used in a single-file custom element. No dependencies, no build step, no Node.js, no network activity. Just a utility function small enough that pasting it in the bottom is reasonable. Its only 207 bytes! 
 
 ## Details and Limitations
 * The templating is as basic as it gets. There are no ifs or loops or block expressions, but I'm open to adding these if it doesn't blow up the filesize.

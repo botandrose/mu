@@ -1,7 +1,7 @@
 function Mu(template, element) {
   return template
     // events
-    .replace(/@([^= ]+)="([^"]+)"/g, (_,name,callback) => {
+    .replace(/@([\w:]+)="([^"]+)"/g, (_,name,callback) => {
       element["μ"+name] ||= element.addEventListener(name, event => event.μ?.apply(element, [event])) || 1
       return `on${name}="event.μ=function(event){${callback}}"`
     })
