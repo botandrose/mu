@@ -67,7 +67,8 @@ But the idea is for Mu to be used in a single-file custom element. No dependenci
 * Mu is an abbreviation of [Mustache](https://github.com/janl/mustache.js), both in name and in functionality.
 
 ## Version History
-
+* 0.2
+    * Rewrote event handling to be smaller and simpler, but now relies on being rendered in a Shadow DOM
 * 0.1
     * Initial Release
 
