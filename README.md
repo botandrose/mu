@@ -49,12 +49,12 @@ class MyCounter extends HTMLElement {
 }
 customElements.define("my-counter", MyCounter)
 
-function Mu(e,t){return e.replace(/@(\w+)="([^"]+)"/g,(e,o,t)=>`on${o}="${t.replace(/\bthis\b/,"getRootNode().host")}"`).replace(/{{([^}]+)}}/g,(e,o)=>t[o])}
+function Mu(e,t){return e.replace(/@(\w+)="([^"]+)"/g,(e,o,t)=>`on${o}="${t.replace(/\bthis\b/g,"getRootNode().host")}"`).replace(/{{([^}]+)}}/g,(e,o)=>t[o])}
 ```
 
 Notice that Mu is simply pasted inline at the bottom of the file. Blasphemy!
 
-But the idea is for Mu to be used in a single-file custom element. No dependencies, no build step, no Node.js, no network activity. Just a utility function small enough that pasting it in the bottom is reasonable. Its only 158 bytes!
+But the idea is for Mu to be used in a single-file custom element. No dependencies, no build step, no Node.js, no network activity. Just a utility function small enough that pasting it in the bottom is reasonable. Its only 159 bytes!
 
 ## Details and Limitations
 * There's no Virtual DOM... `Mu` just returns a string! You're responsible for somehow rendering that string to the DOM.
